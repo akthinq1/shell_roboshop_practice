@@ -13,7 +13,7 @@ ROOT_ID=$(id -u)   #to find ID
 
 LOGS_FOLDER="/var/logs/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-LOG_FILE= "$LOGS_FOLDER/$SCRIPT_NAME.log
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log
 
 echo $LOG_FILE
 
