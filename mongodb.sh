@@ -36,3 +36,27 @@ VALIDATE () {
         echo -e "$2... is $RED failure $RESET" | tee -a $LOG_FILE
     fi
 }
+
+cp mongo.repo /etc/yum.repos.d/mongodb.repo
+VALIDATE $? "copying MongoDB repo"  
+
+dnf install mongodb-org -y &>>$LOG_FILE
+VALIDATE $? "Installing mongodb server"
+
+systemctl enable mongod &>>$LOG_FILE
+VALIDATE $? "Enabling mongodb"
+
+systemctl start mongod &>>$LOG_FILE
+VALIDATE $? "Starting monogoDB"
+
+#change config file for ip address
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf  &>>$LOG_FILE
+VALIDATE $? "Editing mongoDB file for Remote connection"
+
+systemctl restart mongod &>>$LOG_FILE
+VALIDATE $? "Starting monogoDB"
+
+END_TIME=$(date +%s)
+
+TOTAL_TIME=$(( $END_TIME-$START_TIME ))
+echo "Time taken to complete the script $TOTAL_TIME" | tee -a &>>LOG_FILE
