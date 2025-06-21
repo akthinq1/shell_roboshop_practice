@@ -31,30 +31,30 @@ fi
 VALIDATE () {
     if [ $1 -eq 0 ]
     then
-        echo -e " $2... is $GREEN success $RESET" | tee -a $LOG_FILE
+        echo -e "$2... is $GREEN success $RESET" | tee -a $LOG_FILE
     else
         echo -e "$2... is $RED failure $RESET" | tee -a $LOG_FILE
     fi
 }
 
-cp mongo.repo /etc/yum.repos.d/mongodb.repo
-VALIDATE $? "copying MongoDB repo"  
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+VALIDATE $? "Copying MONGODB repo"
 
 dnf install mongodb-org -y &>>$LOG_FILE
-VALIDATE $? "Installing mongodb server"
+VALIDATE $? "installing mongdb"
 
 systemctl enable mongod &>>$LOG_FILE
-VALIDATE $? "Enabling mongodb"
+VALIDATE $? "enable mongodb"
 
 systemctl start mongod &>>$LOG_FILE
-VALIDATE $? "Starting monogoDB"
+VALIDATE $? "Start MONGODB"
 
-#change config file for ip address
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf  &>>$LOG_FILE
+sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mongod.conf &>>$LOG_FILE
 VALIDATE $? "Editing mongoDB file for Remote connection"
 
-systemctl restart mongod &>>$LOG_FILE
-VALIDATE $? "Starting monogoDB"
+systemctl restart mongod
+VALIDATE $? "Restart MONGODB"
 
 END_TIME=$(date +%s)
 
