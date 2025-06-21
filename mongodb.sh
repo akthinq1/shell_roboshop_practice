@@ -13,7 +13,7 @@ ROOT_ID=$(id -u)   #to find ID
 
 LOGS_FOLDER="/var/logs/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-LOG_FILE= "${LOGS_FOLDER}/${SCRIPT_NAME}.log
+LOG_FILE= "$LOGS_FOLDER/$SCRIPT_NAME.log
 
 echo $LOG_FILE
 
@@ -21,9 +21,17 @@ mkdir -p $LOGS_FOLDER
 
 echo "Script started and executing at: $(date)" | tee -a $LOG_FILE
 
-if[$ROOT_ID -ne 0]
+if [ $ROOT_ID -ne 0 ]
 then
     echo -e "$RED ERROR:: run the script with root access $RESET" | tee -a $LOG_FILE
-
+else
+    echo -e "$GREEN Script is running... no issues $RESET" | tee -a $LOG_FILE
 fi
 
+VALIDATE () {
+    if [ $1 -eq 0]
+    then
+        echo -e " $2... is $GREEN success $RESET" | tee -a $LOG_FILE
+    else
+        echo -e "$2... is $RED failure $RESET" | tee -a $LOG_FILE
+}
