@@ -24,7 +24,6 @@ echo "Script started and executing at: $(date)" | tee -a $LOG_FILE
 if[$ROOT_ID -ne 0]
 then
     echo -e "$RED ERROR:: run the script with root access $RESET" | tee -a $LOG_FILE
-else
-    echo -e "$GREEN Script is running... no issues $RESET" | tee -a $LOG_FILE
+
 fi
 
