@@ -34,4 +34,5 @@ VALIDATE () {
         echo -e " $2... is $GREEN success $RESET" | tee -a $LOG_FILE
     else
         echo -e "$2... is $RED failure $RESET" | tee -a $LOG_FILE
+    fi
 }
