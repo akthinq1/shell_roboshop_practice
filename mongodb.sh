@@ -1,6 +1,6 @@
 #!/bin/bash
 
-START_TIME = $(date +%s)
+START_TIME=$(date +%s)
 
 # variables
 RED="\e[31m"
