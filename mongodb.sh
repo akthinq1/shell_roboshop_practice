@@ -15,11 +15,11 @@ LOGS_FOLDER="/var/logs/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-echo $LOG_FILE
+echo -e "$YELLOW $LOG_FILE $RESET"
 
 mkdir -p $LOGS_FOLDER
 
-echo "Script started and executing at: $(date)" | tee -a $LOG_FILE
+echo -e "$BLUE Script started and executing at: $(date) $RESET" | tee -a $LOG_FILE
 
 if [ $ROOT_ID -ne 0 ]
 then
