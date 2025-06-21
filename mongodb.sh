@@ -5,8 +5,8 @@ START_TIME=$(date +%s)
 # variables
 RED="\e[31m"
 GREEN="\e[32m"
-BLUE="\e[33m"
-YEL="\e[34m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
 RESET="\e[0m"
 
 ROOT_ID=$(id -u)   #to find ID
@@ -15,7 +15,7 @@ LOGS_FOLDER="/var/logs/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-echo -e "$YELLOW $LOG_FILE $RESET"
+echo -e "$YELLOW Print log file ${LOG_FILE} $RESET"
 
 mkdir -p $LOGS_FOLDER
 
